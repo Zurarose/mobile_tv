@@ -15,7 +15,11 @@ interface UIContextType {
   message?: string;
 }
 
-export const UIContextProvider: React.FC = ({children}) => {
+interface PropTypes {
+  children?: React.ReactNode
+}
+
+export const UIContextProvider: React.FC<PropTypes> = ({children}) => {
   const [alert, setAlert] = useState<UIContextType>({
     show: false,
     severity: 'info',
