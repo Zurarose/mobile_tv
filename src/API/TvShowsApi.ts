@@ -10,9 +10,12 @@ const ShowApi = axios.create({
 export const TvShowsApi = {
   async getShowList(length: 'full' | 'short', date: Date) {
     const count = length === 'full' ? '' : 'web?'
-    const requestDate = date.toISOString().slice(0, 10);
+    let dd = date.getUTCDate().toString()
+    if (+dd < 10) dd = "0" + dd
+    let mm = date.getMonth().toString()
+    if (+mm < 10) mm = "0" + mm
+    const requestDate = date.getFullYear() + "-" + mm + "-" + dd;
     const result = await ShowApi.get(count, {params: {date: requestDate}});
-    console.log(result.data);
     return result.data;
   },
 }

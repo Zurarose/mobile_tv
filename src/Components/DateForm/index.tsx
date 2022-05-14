@@ -1,6 +1,6 @@
 import React from 'react';
 import tvBox from "./assets/images/tv_img.png";
-import {Box, BoxProps, Container, styled, TextField, Typography, TypographyProps} from "@mui/material";
+import {Box, BoxProps, Container, styled, TextField, Typography} from "@mui/material";
 import {LocalizationProvider, PickersDay, PickersDayProps, StaticDatePicker} from '@mui/x-date-pickers';
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {useNavigate} from "react-router-dom";
@@ -12,18 +12,12 @@ const BoxImg = styled(Box)<BoxProps>(() => ({
   height: '125px',
 }));
 
-const TvTypography = styled(Typography)<TypographyProps>(() => ({
-  variant: 'h3',
-  textAlign: 'center',
-  fontWeight: 500,
-}));
-
 const CustomPickersDay = styled(PickersDay)<PickersDayProps<Date>>(({theme}) => ({
   borderRadius: 0,
   border: '1px solid grey',
   backgroundColor: theme.palette.primary.main,
   color: theme.palette.common.black,
-}));
+})) as React.ComponentType<PickersDayProps<Date>>
 
 interface PropTypes {
   setDateCallback: (value: Date) => void;
@@ -32,8 +26,10 @@ interface PropTypes {
 
 const DateForm: React.FC<PropTypes> = ({setDateCallback, date}) => {
   const navigate = useNavigate();
-
-  const renderWeekPickerDay = (pickersDayProps: any) => {
+  const renderWeekPickerDay = (
+    date: Date,
+    selectedDates: Array<Date | null>,
+    pickersDayProps: PickersDayProps<Date>) => {
     return (
       <CustomPickersDay
         {...pickersDayProps}
@@ -43,28 +39,32 @@ const DateForm: React.FC<PropTypes> = ({setDateCallback, date}) => {
         today={true}/>
     );
   };
+
+  const onClick = (date: Date | null) => {
+    if (date) {
+      setDateCallback(date)
+      navigate('/Shows');
+    }
+  }
   return (
     <>
       <Container fixed>
         <BoxImg sx={{mt: 5}}>
           <img alt='tv img' src={tvBox}/>
         </BoxImg>
-        <TvTypography sx={{m: 3}}>
+        <Typography variant='h3' sx={{m: 3}}>
           Для получения списка сериалов, пожалуйста, выберите необходимый месяц и день.
-        </TvTypography>
+        </Typography>
       </Container>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <StaticDatePicker
           views={['day']}
           displayStaticWrapperAs="mobile"
           showToolbar={false}
-          label="Week picker"
+          label="day picker"
           value={date}
           onChange={(newDate) => {
-            if (newDate) {
-              navigate('/Shows');
-              setDateCallback(newDate)
-            }
+            onClick(newDate)
           }}
           renderDay={renderWeekPickerDay}
           renderInput={(params) => <TextField {...params} />}

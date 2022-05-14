@@ -1,18 +1,10 @@
 import React from 'react';
-import {AppBar, AppBarProps, Box, styled, Toolbar, Typography, TypographyProps} from "@mui/material";
+import {AppBar, AppBarProps, Box, styled, Toolbar, Typography} from "@mui/material";
 import bgImage from './assets/images/navBarBg.png';
 
 interface PropTypes {
   children?: React.ReactNode
 }
-
-const NavBarTypography = styled(Typography)<TypographyProps>(() => ({
-  textAlign: 'center',
-  flexGrow: 1,
-  fontSize: '18px',
-  fontWeight: 500,
-  color: 'black',
-}));
 
 const NavBarMain = styled(AppBar)<AppBarProps>(() => ({
   position: 'fixed',
@@ -29,9 +21,9 @@ const NavBar: React.FC<PropTypes> = ({children}) => {
       <Box>
         <NavBarMain>
           <Toolbar>
-            <NavBarTypography>
+            <Typography variant='h6'>
               SUPER FILM
-            </NavBarTypography>
+            </Typography>
           </Toolbar>
         </NavBarMain>
         <Toolbar/>
