@@ -12,7 +12,7 @@ export const TvShowsApi = {
     const count = length === 'full' ? '' : 'web?'
     let dd = date.getUTCDate().toString()
     if (+dd < 10) dd = "0" + dd
-    let mm = date.getMonth().toString()
+    let mm = (date.getMonth() + 1).toString()
     if (+mm < 10) mm = "0" + mm
     const requestDate = date.getFullYear() + "-" + mm + "-" + dd;
     const result = await ShowApi.get(count, {params: {date: requestDate}});

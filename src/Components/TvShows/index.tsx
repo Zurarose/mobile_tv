@@ -12,7 +12,6 @@ interface PropsTypes {
 const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
   const {setAlert} = useContext(UIContextAlert)
   const [shows, setShows] = useState<any>([]);
-
   const getShowsCallback = useCallback(async (length: 'full' | 'short', date: Date) => {
     try {
       return await TvShowsApi.getShowList(length, date)
@@ -38,6 +37,7 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
   }, [nextPage])
 
   useEffect(() => {
+    console.log('hi')
     window.addEventListener('scroll', onScrollToBottom)
     return () => {
       window.removeEventListener('scroll', onScrollToBottom)
@@ -61,17 +61,21 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
   return (
     <div>
       {shows.map((item: any) => {
-        if (item.date) {
+        if (item && item.date) {
           return (
             <Box key={item.date} sx={{mt: 3}}>
               <Typography variant='h6'>
-                {date.getUTCDate()} {monthNames[date.getMonth()]} {date.getFullYear()}
+                {item.date.getUTCDate()} {monthNames[item.date.getMonth()]} {item.date.getFullYear()}
               </Typography>
               <Divider sx={{mt: 3}}/>
             </Box>)
-        } else {
+        } else if (item) {
           return <ShowCard key={item.id} id={item.id} name={item.name} season={item.season} number={item.number}
                            premiered={item._embedded.show.premiered} image={item._embedded.show.image}/>
+        } else {
+          return <Typography variant='h6'>
+            Нет сериалов на данный день
+          </Typography>
         }
       })}
     </div>
