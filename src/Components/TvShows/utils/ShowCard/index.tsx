@@ -1,5 +1,16 @@
 import React, {useContext} from 'react';
-import {Box, Card, CardActions, CardContent, CardMedia, Grid, Typography} from "@mui/material";
+import {
+  Box,
+  BoxProps,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  CardMediaProps,
+  Grid,
+  styled,
+  Typography
+} from "@mui/material";
 import {UIContextModal} from "../../../../Common/UIContext";
 import noImage from '../../assets/images/No_Image_Available.jpg'
 
@@ -12,16 +23,38 @@ interface PropsType {
   image: { medium: string, original: string };
 }
 
+const CardBody = styled(Box)<BoxProps>(() => ({
+  display: 'flex',
+  boxShadow: 'none',
+}));
+
+const BoxColumn = styled(Box)<BoxProps>(() => ({
+  display: 'flex',
+  flexDirection: 'column'
+}));
+
+const BoxSerial = styled(Box)<BoxProps>(() => ({
+  backgroundColor: '#f5f5f5',
+  borderRadius: '5px',
+  width: '80%'
+}));
+
+const imageStyle = {
+  borderRadius: '15px',
+  maxHeight: '120px',
+  objectFit: 'contain'
+}
+
 const ShowCard: React.FC<PropsType> = ({id, name, number, season, premiered, image}) => {
   const {setModal} = useContext(UIContextModal)
 
   return (
-    <Card sx={{display: 'flex', boxShadow: 'none', my: 4}}>
+    <CardBody sx={{my: 4}}>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <CardMedia
-            sx={{borderRadius: '15px', maxHeight: '120px', objectFit: 'contain'}}
-            component="img"
+            component='img'
+            sx={imageStyle}
             src={image ? image.medium : noImage}
             onClick={() => {
               setModal({
@@ -32,26 +65,26 @@ const ShowCard: React.FC<PropsType> = ({id, name, number, season, premiered, ima
           />
         </Grid>
         <Grid item xs={8}>
-          <Box sx={{display: 'flex', flexDirection: 'column'}}>
+          <BoxColumn>
             <CardContent sx={{px: 1, pt: 1}}>
-              <Typography component="div" variant="h5">
+              <Typography variant="h5">
                 {name}
               </Typography>
-              <Typography variant="subtitle2" color="text.secondary" component="div">
+              <Typography variant="subtitle2" color="text.secondary">
                 {premiered.split('-')[0]}
               </Typography>
             </CardContent>
             <CardActions>
-              <Box sx={{backgroundColor: '#f5f5f5', p: 1, borderRadius: '5px', width: '80%'}}>
-                <Typography variant="subtitle1" color="text.secondary" component="div">
+              <BoxSerial sx={{p: 1}}>
+                <Typography variant="subtitle1" color="text.secondary">
                   Сезон: {season} Эпизод: {number}
                 </Typography>
-              </Box>
+              </BoxSerial>
             </CardActions>
-          </Box>
+          </BoxColumn>
         </Grid>
       </Grid>
-    </Card>
+    </CardBody>
   );
 };
 

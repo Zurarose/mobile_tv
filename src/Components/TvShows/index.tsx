@@ -2,12 +2,26 @@ import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {TvShowsApi} from "../../API/TvShowsApi";
 import {UIContextAlert} from "../../Common/UIContext";
 import ShowCard from "./utils/ShowCard";
-import {Box, Divider, Typography} from "@mui/material";
+import {Box, BoxProps, Button, ButtonProps, Divider, styled, Typography} from "@mui/material";
 
 interface PropsTypes {
   date: Date;
   setDateCallback: (value: Date) => void
 }
+
+const BtnMore = styled(Button)<ButtonProps>(({theme}) => ({
+  backgroundColor: theme.palette.primary.light,
+  borderColor: '#e0e0e0',
+  color: theme.palette.common.black,
+  borderRadius: '5px',
+  width: '80%'
+}));
+
+const BoxCenter = styled(Box)<BoxProps>(() => ({
+  display: 'flex',
+  justifyContent: 'center',
+}));
+
 
 const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
   const {setAlert} = useContext(UIContextAlert)
@@ -37,7 +51,6 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
   }, [nextPage])
 
   useEffect(() => {
-    console.log('hi')
     window.addEventListener('scroll', onScrollToBottom)
     return () => {
       window.removeEventListener('scroll', onScrollToBottom)
@@ -48,11 +61,17 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
     (async () => {
       if (date) {
         const result = await getShowsCallback('short', date)
-        const newDate = shows.concat([{date: date}])
-        setShows(newDate.concat(result))
+        if (result.length !== 0) {
+          const newDate = shows.concat([{date: date}])
+          const newFooterBtn = [{footer: "here"}]
+          setShows(newDate.concat(result).concat(newFooterBtn))
+        }
+        if (document.body.clientHeight < window.innerHeight) {
+          nextPage()
+        }
       }
     })()
-  }, [date, getShowsCallback]);
+  }, [date]);
 
   const monthNames = ["января", "февраля", "марта", "апреля", "мая", "июня",
     "июля", "августа", "сентября", "октября", "ноября", "декабря"
@@ -69,13 +88,17 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
               </Typography>
               <Divider sx={{mt: 3}}/>
             </Box>)
+        } else if (item && item.footer) {
+          return (
+            <BoxCenter>
+              <BtnMore variant="outlined">
+                <Typography variant="subtitle2" color="text.secondary">Показать еще</Typography>
+              </BtnMore>
+            </BoxCenter>
+          )
         } else if (item) {
           return <ShowCard key={item.id} id={item.id} name={item.name} season={item.season} number={item.number}
                            premiered={item._embedded.show.premiered} image={item._embedded.show.image}/>
-        } else {
-          return <Typography variant='h6'>
-            Нет сериалов на данный день
-          </Typography>
         }
       })}
     </div>

@@ -18,7 +18,7 @@ const RootComponent: React.FC = () => {
       <NavBar>
         <Routes>
           <Route index element={<DateForm date={date} setDateCallback={setDateCallback}/>}/>
-          <Route path='/Shows' element={<TvShows date={date} setDateCallback={setDateCallback}/>}/>
+          <Route path='/shows' element={<TvShows date={date} setDateCallback={setDateCallback}/>}/>
         </Routes>
       </NavBar>
     </>
