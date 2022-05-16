@@ -1,3 +1,10 @@
+# Что проверять?:
+
+1) Выбор даты в календаре
+2) Подгрузка новых данных при скролле
+3) Получение полного списка сериалов на выбранный день по нажатия "Показать еще"
+4) Сворачивания списка сериалов на выбранный день по нажатию "Показать основные"
+
 # Getting Started with Create React RootApp
 
 This project was bootstrapped with [Create React RootApp](https://github.com/facebook/create-react-app).
