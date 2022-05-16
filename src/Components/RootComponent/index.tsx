@@ -3,7 +3,7 @@ import {Route, Routes} from 'react-router-dom';
 import NavBar from '../../Common/NavBar';
 import DateForm from "../DateForm";
 
-const TvShows = React.lazy(() => import("../TvShows"))
+const TvShows = React.lazy(() => import("../TvShows"));
 
 
 const RootComponent: React.FC = () => {
@@ -11,7 +11,7 @@ const RootComponent: React.FC = () => {
 
   const setDateCallback = useCallback((value: Date) => {
     setDate(value);
-  }, [])
+  }, []);
 
   return (
     <>

@@ -1,8 +1,8 @@
 import {Alert, Box, CardMedia, Modal, Snackbar} from "@mui/material";
 import React, {createContext, useState} from "react";
 
-export const UIContextAlert = createContext<UIContextPropsAlert>({} as UIContextPropsAlert)
-export const UIContextModal = createContext<UIContextPropsModal>({} as UIContextPropsModal)
+export const UIContextAlert = createContext<UIContextPropsAlert>({} as UIContextPropsAlert);
+export const UIContextModal = createContext<UIContextPropsModal>({} as UIContextPropsModal);
 
 type AlertColor = 'success' | 'info' | 'warning' | 'error';
 

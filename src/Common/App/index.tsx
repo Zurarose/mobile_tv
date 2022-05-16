@@ -16,6 +16,6 @@ const App: React.FC = () => {
       </BrowserRouter>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

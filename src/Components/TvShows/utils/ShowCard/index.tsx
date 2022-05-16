@@ -2,11 +2,9 @@ import React, {useContext} from 'react';
 import {
   Box,
   BoxProps,
-  Card,
   CardActions,
   CardContent,
   CardMedia,
-  CardMediaProps,
   Grid,
   styled,
   Typography
@@ -43,10 +41,10 @@ const imageStyle = {
   borderRadius: '15px',
   maxHeight: '120px',
   objectFit: 'contain'
-}
+};
 
-const ShowCard: React.FC<PropsType> = ({id, name, number, season, premiered, image}) => {
-  const {setModal} = useContext(UIContextModal)
+const ShowCard: React.FC<PropsType> = React.memo(({id, name, number, season, premiered, image}) => {
+  const {setModal} = useContext(UIContextModal);
 
   return (
     <CardBody sx={{my: 4}}>
@@ -86,6 +84,6 @@ const ShowCard: React.FC<PropsType> = ({id, name, number, season, premiered, ima
       </Grid>
     </CardBody>
   );
-};
+});
 
 export default ShowCard;

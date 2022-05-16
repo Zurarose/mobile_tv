@@ -27,7 +27,7 @@ const CustomPickersDay = styled(PickersDay)<PickersDayProps<Date>>(({theme}) => 
     fontWeight: 800,
     backgroundColor: `${theme.palette.primary.light} !important`,
   }
-})) as React.ComponentType<PickersDayProps<Date>>
+})) as React.ComponentType<PickersDayProps<Date>>;
 
 const DateForm: React.FC<PropTypes> = ({setDateCallback, date}) => {
   const navigate = useNavigate();
