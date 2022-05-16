@@ -42,8 +42,10 @@ const DateForm: React.FC<PropTypes> = ({setDateCallback, date}) => {
         disableMargin
         disableHighlightToday={true}
         today={true}
-        onAnimationEnd={() => {
-          navigate('/shows')
+        onClick={() => {
+          setTimeout(() => {
+            navigate('/shows')
+          }, 350);
         }}
       />
     );
