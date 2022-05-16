@@ -67,7 +67,9 @@ const DateForm: React.FC<PropTypes> = ({setDateCallback, date}) => {
           label="day picker"
           value={date}
           onChange={(newDate) => {
-            if (newDate) setDateCallback(newDate)
+            if (newDate) {
+              setDateCallback(newDate)
+            }
           }}
           renderDay={renderWeekPickerDay}
           renderInput={(params) => <TextField {...params} />}
