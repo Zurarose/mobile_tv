@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import {TvShowsApi} from "../../API/TvShowsApi";
 import {UIContextAlert} from "../../Common/UIContext";
 import ShowCard from "./utils/ShowCard";
@@ -14,6 +14,7 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
     const {setAlert} = useContext(UIContextAlert);
     const [shows, setShows] = useState<any>([]);
     const [showsLength, setShowsLength] = useState(0);
+    const currDate = useRef<Date>();
     const getShowsCallback = useCallback(async (length: 'full' | 'short' = 'short', date: Date) => {
         try {
             return await TvShowsApi.getShowList(length, date)
@@ -92,7 +93,7 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
                 } else if (item && item.dateForBtn) {
                     return (
                         <BtnMore key={item.id} index={index} showsLength={showsLength} expandShows={expandShows}
-                                 getShowsCallback={getShowsCallback} date={date} unExpandShows={unExpandShows}/>
+                                 getShowsCallback={getShowsCallback} date={item.dateForBtn} unExpandShows={unExpandShows}/>
                     )
                 } else if (item) {
                     return <ShowCard key={item.id} id={item.show.id} name={item.show.name} season={item.season}

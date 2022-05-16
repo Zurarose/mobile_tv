@@ -58,7 +58,6 @@ const BtnMore: React.FC<PropTypes> = ({index, showsLength, date, getShowsCallbac
                         еще {moreShows.length - showsLength} сериала</Typography><ExpandMoreIcon
                         sx={{height: '18px'}}/></>
                 }
-
             </BtnShowMore>
         </BoxCenter>
     );
