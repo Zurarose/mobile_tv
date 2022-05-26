@@ -51,12 +51,18 @@ const BtnMore: React.FC<PropTypes> = ({index, showsLength, date, getShowsCallbac
         <BoxCenter key={index}>
             <BtnShowMore onClick={expandRequest} variant="outlined">
                 {isExpand
-                    ? <><Typography sx={{textTransform: 'none'}} variant="subtitle2" color="text.secondary">Показать
-                        основные
-                    </Typography><ExpandLessIcon sx={{height: '18px'}}/></>
-                    : <><Typography sx={{textTransform: 'none'}} variant="subtitle2" color="text.secondary">Показать
-                        еще {moreShows.length - showsLength} сериала</Typography><ExpandMoreIcon
-                        sx={{height: '18px'}}/></>
+                    ?
+                    <>
+                        <Typography sx={{textTransform: 'none'}} variant="subtitle2" color="text.secondary">Показать
+                            основные
+                        </Typography><ExpandLessIcon sx={{height: '18px'}}/>
+                    </>
+                    :
+                    <>
+                        <Typography sx={{textTransform: 'none'}} variant="subtitle2" color="text.secondary">Показать
+                            еще {moreShows.length - showsLength} сериала</Typography><ExpandMoreIcon
+                        sx={{height: '18px'}}/>
+                    </>
                 }
             </BtnShowMore>
         </BoxCenter>
