@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {TvShowsApi} from "../../API/TvShowsApi";
 import {UIContextAlert} from "../../Common/UIContext";
 import ShowCard from "./utils/ShowCard";
@@ -70,9 +70,6 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
                     setShows(newDate.concat(result).concat(newFooterBtn));
                     setShowsLength(result.length)
                 }
-                /*if (document.body.clientHeight < window.innerHeight) {
-                  nextPage()
-                }*/
             }
         })()
     }, [date]);
