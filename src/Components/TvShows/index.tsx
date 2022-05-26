@@ -14,7 +14,6 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
     const monthNames = ["января", "февраля", "марта", "апреля", "мая", "июня",
         "июля", "августа", "сентября", "октября", "ноября", "декабря"
     ];
-
     const {setAlert} = useContext(UIContextAlert);
     const [shows, setShows] = useState<any>([]);
     const [showsLength, setShowsLength] = useState(0);
@@ -38,9 +37,9 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
     }, [shows]);
 
     const unExpandShows = useCallback((indexFrom: number, showLength: number) => {
-       const unExpandShowList = [...shows];
-       unExpandShowList.splice(indexFrom - showLength, showLength);
-       setShows(unExpandShowList);
+        const unExpandShowList = [...shows];
+        unExpandShowList.splice(indexFrom - showLength, showLength);
+        setShows(unExpandShowList);
     }, [shows]);
 
     const nextPage = useCallback(() => {
@@ -92,7 +91,8 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
                 } else if (item && item.dateForBtn) {
                     return (
                         <BtnMore key={item.id} index={index} showsLength={showsLength} expandShows={expandShows}
-                                 getShowsCallback={getShowsCallback} date={item.dateForBtn} unExpandShows={unExpandShows}/>
+                                 getShowsCallback={getShowsCallback} date={item.dateForBtn}
+                                 unExpandShows={unExpandShows}/>
                     )
                 } else if (item) {
                     return <ShowCard key={item.id} id={item.show.id} name={item.show.name} season={item.season}
