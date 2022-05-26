@@ -62,7 +62,6 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
 
     useEffect(() => {
         (async () => {
-            if (date) {
                 const result = await getShowsCallback('short', date);
                 if (result.length !== 0) {
                     const newDate = shows.concat([{date: date}]);
@@ -70,7 +69,6 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
                     setShows(newDate.concat(result).concat(newFooterBtn));
                     setShowsLength(result.length)
                 }
-            }
         })()
     }, [date]);
 
@@ -91,7 +89,7 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
                                  getShowsCallback={getShowsCallback} date={item.dateForBtn}
                                  unExpandShows={unExpandShows}/>
                     )
-                } else if (item) {
+                } else {
                     return <ShowCard key={item.id} id={item.show.id} name={item.show.name} season={item.season}
                                      number={item.number}
                                      premiered={item.show.premiered} image={item.show.image}/>
