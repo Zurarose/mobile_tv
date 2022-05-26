@@ -11,10 +11,13 @@ interface PropsTypes {
 }
 
 const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
+    const monthNames = ["января", "февраля", "марта", "апреля", "мая", "июня",
+        "июля", "августа", "сентября", "октября", "ноября", "декабря"
+    ];
+
     const {setAlert} = useContext(UIContextAlert);
     const [shows, setShows] = useState<any>([]);
     const [showsLength, setShowsLength] = useState(0);
-    const currDate = useRef<Date>();
     const getShowsCallback = useCallback(async (length: 'full' | 'short' = 'short', date: Date) => {
         try {
             return await TvShowsApi.getShowList(length, date)
@@ -74,10 +77,6 @@ const TvShows: React.FC<PropsTypes> = ({date, setDateCallback}) => {
             }
         })()
     }, [date]);
-
-    const monthNames = ["января", "февраля", "марта", "апреля", "мая", "июня",
-        "июля", "августа", "сентября", "октября", "ноября", "декабря"
-    ];
 
     return (
         <div>
